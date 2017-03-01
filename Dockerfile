@@ -10,4 +10,4 @@ RUN curl -OL https://github.com/codesuki/ecs-gen/releases/download/$ECS_GEN_RELE
 
 COPY nginx.tmpl nginx.tmpl
 
-CMD nginx && ecs-gen --signal="nginx -s reload" --template=nginx.tmpl --output=/etc/nginx/conf.d/default.conf
+CMD nginx && ecs-gen --signal="nginx -s reload" --region=us-east-2 --template=nginx.tmpl --output=/etc/nginx/conf.d/default.conf

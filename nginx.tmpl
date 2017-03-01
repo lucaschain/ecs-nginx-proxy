@@ -53,5 +53,9 @@ server {
         location / {
                 proxy_pass http://{{ $domain }};
         }
+
+        location ~*  \.(jpg|jpeg|png|gif|ico|css|js)$ {
+                expires 10d;
+        }
 }
 {{ end }}
