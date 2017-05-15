@@ -15,8 +15,10 @@ COPY .htpasswd /etc/nginx/.htpasswd
 
 RUN mkdir -p /etc/nginx/lastconf.d
 
+COPY nginx-check.conf /etc/nginx/nginx-check.conf
+
 CMD nginx && ecs-gen \
-  --signal="nginx -t -c /etc/nginx/lastconf.d/default.conf && mv /etc/nginx/lastconf.d/default.conf /etc/nginx/conf.d/default.conf  && nginx -s reload" \
+  --signal="nginx -t -c /etc/nginx/nginx-check.conf && mv /etc/nginx/lastconf.d/default.conf /etc/nginx/conf.d/default.conf  && nginx -s reload" \
   --region=us-east-2 \
   --template=nginx.tmpl \
   --output=/etc/nginx/lastconf.d/default.conf
