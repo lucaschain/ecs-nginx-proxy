@@ -13,6 +13,8 @@ COPY ecs-gen-linux-amd64 /usr/local/bin/ecs-gen
 COPY nginx.tmpl nginx.tmpl
 COPY .htpasswd /etc/nginx/.htpasswd
 
+RUN mkdir -p /etc/nginx/lastconf.d
+
 CMD nginx && ecs-gen \
   --signal="nginx -t -c /etc/nginx/lastconf.d/default.conf && mv /etc/nginx/lastconf.d/default.conf /etc/nginx/conf.d/default.conf  && nginx -s reload" \
   --region=us-east-2 \
